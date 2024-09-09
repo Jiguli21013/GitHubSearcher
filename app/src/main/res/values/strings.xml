@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">GitHubSearcherYanchelenko</string>
+
+    <string name="forks_count">%d\nForks</string>
+
+    <string name="search_here_title">Search users and repositories</string>
+
+    <string name="search_text">Search</string>
+    <string name="try_again_text">Lets try again :(</string>"
+
+    <!-- desc -->
+    <string name="search_icon_desc">search icon</string>
+    <string name="avatar_icon_desc">avatar icon</string>
+    <string name="folder_icon_desc">folder icon</string>
+    <string name="file_icon_desc">file icon</string>
+</resources>
