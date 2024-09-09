@@ -5,6 +5,7 @@ import com.yanchelenko.githubsearcher.data.repositories.interfaces.IUserSearchRe
 import com.yanchelenko.githubsearcher.domain.models.CombinedRepsAndUsersModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
 class GetListOfDataUseCase(
     private val userSearchRepository: IUserSearchRepository,
@@ -14,22 +15,23 @@ class GetListOfDataUseCase(
     override suspend fun invoke(params: Params): Result<List<CombinedRepsAndUsersModel>> = coroutineScope {
 
         val usersResult = async {
+            println("---async---1")
             userSearchRepository.getUsersList(
                 searchValue = params.searchValue,
                 page = params.page
             )
-        }.await()
+        }
 
         val repositoriesResult = async {
             repSearchRepository.getRepsList(
                 searchValue = params.searchValue,
                 page = params.page
             )
-        }.await()
+        }
 
         return@coroutineScope combineAndSortResults(
-            repositoriesResult = repositoriesResult,
-            usersResult = usersResult
+            repositoriesResult = repositoriesResult.await(),
+            usersResult = usersResult.await()
         )
     }
 
